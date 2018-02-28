@@ -1,0 +1,37 @@
+<a href="/logout">Logout</a>
+<a href="/home">Home</a>
+
+
+@functions{
+      public int Getremainingdays(DateTime compaperdate) {
+                            DateTime Comparer=compaperdate;
+                            DateTime Variable = DateTime.Now;
+                            int daysremaining = 0;
+                            while (Variable < Comparer) 
+                            {
+                                Variable = Variable.AddDays(1);
+                                daysremaining++;
+                            }
+                                    
+                            return (daysremaining);
+                        }
+                    
+            
+}
+
+<h1>@ViewBag.thatauction.productname</h1> <br>
+createdby:<h4>@ViewBag.thatauction.createdby</h4> <br>
+
+Time Remaining: <h4>@Getremainingdays(@ViewBag.thatauction.enddate)</h4><br> 
+
+Description:<h4> @ViewBag.thatauction.description</h4> <br>
+
+Current Highest Bid:<h4>@ViewBag.thatauction.topbid </h4> <br>
+
+@if(@ViewBag.thatauction.createdby!=@ViewBag.UserName){
+    <form action="/bidsubmit/@ViewBag.thatauction.id" method="post">
+    Your Bid Goes Here: <input name="bidnumber" type="number">
+    <button>Bid!</button>
+    </form>
+
+}

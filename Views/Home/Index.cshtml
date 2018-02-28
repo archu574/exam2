@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    @{if(TempData.ContainsKey("err")){
+                ViewBag.errors = TempData["err"];
+                @foreach(var error in @ViewBag.errors)
+                {
+            
+                    if(@error.Errors.Count > 0)
+                    {
+                        
+                        <p>@error.Errors[0].ErrorMessage</p>
+                    }
+                }
+
+            }
+    
+        
+    }
+
+    @ViewBag.ErrorRegister
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="submit" method="post">
+        <h2>Register:</h2>
+        
+        First Name: <input type="text" name="firstname"> <br> <br>
+        Last Name: <input type="text" name="lastname"><br> <br>
+        UserName: <input type="text" name="username"><br> <br>
+        Password: <input type="password" name="pwd"><br> <br>
+        Confirm Password: <input type="password" name="cpwd"><br> <br>
+        
+        <button>Submit</button>
+        <a href="login">Already Registered?</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<h1>Current Auctions</h1>
+
+<h3>Hi @ViewBag.UserName !</h3>
+<a href="/logout">Logout</a>
+
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+@functions{
+      public int Getremainingdays(DateTime compaperdate) {
+                            DateTime Comparer=compaperdate;
+                            DateTime Variable = DateTime.Now;
+                            int daysremaining = 0;
+                            while (Variable < Comparer) 
+                            {
+                                Variable = Variable.AddDays(1);
+                                daysremaining++;
+                            }
+                                    
+                            return (daysremaining);
+                        }
+                    
+            
+}
+
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Seller</th>
+        <th>Top Bid</th>
+        <th>Time Remaining</th>
+        <th>Action</th>
+    </tr>
+
+
+@foreach(var a in @ViewBag.allauctions){
+     <tr>
+        <td><a href="/bidpage/@a.id">@a.productname</a></td>
+        <td>@a.createdby</td>
+         <td>@a.topbid</td>
+         <td>@Getremainingdays(@a.enddate)</td>
+         <td>@if(@a.createdby==@ViewBag.UserName){
+             <a href="/deleteauction/@a.id">Delete</a>
+             }</td>
+
+    </tr>
+
+} 
+   
+</table> 
+
+Your Current Wallet: @ViewBag.currentwallet.wallet
+
+<form action="/newauctionpage" method="get">
+    <button>New Auction</button>
+</form>
+
